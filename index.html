@@ -9,7 +9,7 @@
 <style>
 :root{--bg:#05070f;--card:#0f172a;--accent:#22d3ee;--accent2:#3b82f6;--warn:#fbbf24;--text:#f1f5f9;--muted:#94a3b8}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif}
-body{background:var(--bg);color:var(--text);line-height:1.6}
+body{background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:80px}
 .god-banner{background:linear-gradient(90deg,var(--accent2),var(--accent));color:#000;text-align:center;padding:10px;font-weight:900;font-size:0.9rem;letter-spacing:1px}
 .hidden{display:none}
 .logo{width:120px;height:120px;margin:0 auto 20px;border-radius:12px;box-shadow:0 0 30px var(--accent2)}
@@ -25,6 +25,8 @@ h2{color:var(--accent);margin-bottom:20px}
 .contact-info{display:flex;flex-direction:column;gap:10px}
 .request{border-left:4px solid var(--accent);padding:15px;margin:15px 0;background:#0f172a;border-radius:8px}
 .upload-result{word-break:break-all;color:var(--warn);margin-top:10px}
+.link-box{background:#0f172a;padding:15px;border-radius:8px;border:1px dashed var(--accent);display:flex;gap:10px;align-items:center;margin:15px 0}
+.link-box input{margin:0;background:#05070f}
 .nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);display:flex;justify-content:space-around;padding:10px;border-top:2px solid var(--accent)}
 </style>
 </head>
@@ -46,6 +48,7 @@ h2{color:var(--accent);margin-bottom:20px}
     <img src="https://files.catbox.moe/0zympr.jpeg" class="logo">
     <h1>TWINZ CLIENT PORTAL</h1>
     <p>Diagnostics + Parts + Web + App + Wireless</p>
+    <!-- ONLY INSTALL BUTTON HERE -->
     <button class="btn btn-warn" id="installBtn" style="display:none">📱 Install Twinz App</button>
   </header>
   
@@ -92,6 +95,18 @@ h2{color:var(--accent);margin-bottom:20px}
   </header>
 
   <section style="padding:20px;max-width:1000px;margin:0 auto">
+    
+    <!-- CLIENT LINK FOR ADMIN TO SHARE -->
+    <div class="card">
+      <h2>📲 Client Link - Share With Customers</h2>
+      <p>Copy this link and send to clients via WhatsApp</p>
+      <div class="link-box">
+        <input type="text" id="clientLink" readonly>
+        <button class="btn" onclick="copyLink()">Copy</button>
+        <button class="btn btn-secondary" onclick="shareWhatsApp()">Share WA</button>
+      </div>
+    </div>
+
     <div class="card">
       <h2>📤 Upload to Catbox.moe</h2>
       <p>Upload pictures and videos. Get link instantly.</p>
@@ -114,6 +129,10 @@ h2{color:var(--accent);margin-bottom:20px}
 </div>
 
 <script>
+// AUTO GENERATE CLIENT LINK
+const baseUrl = window.location.origin + window.location.pathname;
+document.getElementById('clientLink').value = baseUrl + '?client';
+
 // ROUTING
 function showClient(){
   modeSelect.classList.add('hidden');
@@ -140,7 +159,19 @@ function logout(){
   bottomNav.classList.add('hidden');
 }
 
-// PWA INSTALL BUTTON
+// COPY + SHARE CLIENT LINK
+function copyLink(){
+  clientLink.select();
+  document.execCommand('copy');
+  alert('✅ Client link copied!');
+}
+function shareWhatsApp(){
+  const link = clientLink.value;
+  const text = `Hi, request services from Twinz Cooperate Services here:%0A${link}`;
+  window.open(`https://wa.me/?text=${text}`,'_blank');
+}
+
+// PWA INSTALL BUTTON - CLIENT ONLY
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
