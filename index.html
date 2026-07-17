@@ -27,7 +27,6 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* === 1. MODERN HEADER WITH GLASS + GLOW === */
 .header{
   background:linear-gradient(135deg,rgba(6,182,212,0.95) 0%,rgba(59,130,246,0.95) 100%);
   backdrop-filter:blur(20px);
@@ -50,7 +49,6 @@ body{
 .header h1{margin:0;font-size:28px;font-weight:900;letter-spacing:-1px;position:relative;z-index:2}
 .header p{margin:10px 0 0;font-size:14px;opacity:0.95;font-weight:600;position:relative;z-index:2}
 
-/* === 2. SOPHISTICATED CARDS WITH HOVER === */
 .card{
   background:var(--glass);backdrop-filter:blur(20px);
   border-radius:20px;padding:20px;margin:18px 0;box-shadow:var(--shadow);
@@ -69,17 +67,27 @@ body{
   padding:12px 28px;font-weight:800;border-radius:12px;font-size:15px;z-index:10;
   box-shadow:0 8px 20px rgba(239,68,68,0.5);letter-spacing:1.5px;
 }
-.card img{
-  width:100%;height:220px;object-fit:cover;border-radius:14px;margin-bottom:14px;
+
+/* NEW: IMAGE GALLERY */
+.product-gallery{position:relative;margin-bottom:14px}
+.card img.main-img{
+  width:100%;height:220px;object-fit:cover;border-radius:14px;
   border:1px solid var(--border);transition:transform 0.4s;
 }
-.card:hover img{transform:scale(1.02)}
+.card:hover img.main-img{transform:scale(1.02)}
+.thumbnails{display:flex;gap:6px;margin-top:8px;overflow-x:auto}
+.thumbnails img{
+  width:50px;height:50px;border-radius:8px;object-fit:cover;
+  border:2px solid transparent;cursor:pointer;opacity:0.6;transition:all 0.3s
+}
+.thumbnails img.active{border-color:var(--accent);opacity:1}
+.thumbnails img:hover{opacity:1}
+
 .card h3{margin:10px 0;color:var(--accent);font-size:18px;font-weight:800;letter-spacing:-0.5px}
 .price{font-size:24px;font-weight:800;color:var(--green);background:linear-gradient(135deg,#22c55e,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .old-price{text-decoration:line-through;color:var(--muted);font-size:14px;margin-left:8px;font-weight:500}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 
-/* === 3. MODERN BUTTONS WITH GRADIENT === */
 .btn{
   background:var(--gradient);color:#030612;border:none;padding:14px 20px;
   border-radius:12px;font-weight:800;cursor:pointer;width:100%;margin-top:12px;
@@ -160,10 +168,10 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
       <button class="btn-whatsapp" onclick="shareWhatsApp()">Share</button>
     </div>
     <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:15px;">
-      <h4 style="margin:0 0 10px; color:var(--purple);">✏️ Edit Services</h4>
+      <h4 style="margin:0 0 10px; color:var(--purple);">✏️ Edit Services - Add up to 5 Images</h4>
       <div id="productEditor"></div>
       <button class="btn btn-green" onclick="saveProducts()">💾 Save All Changes</button>
-      <small style="display:block;margin-top:8px;color:var(--muted)">Saves to Firebase instantly</small>
+      <small style="display:block;margin-top:8px;color:var(--muted)">Image 1 = Main image. Add more URLs for gallery</small>
     </div>
   </div>
 </div>
@@ -320,15 +328,16 @@ onAuthStateChanged(auth, user => {
 });
 
 const defaultProducts = {
-  diag_jlr: {name:"JLR Diagnostics",price:450,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Full System Scan, DTC Clear, Service Reset<br>DPF Regen, EPB, SAS, Key Programming"},
-  wireless_fibre: {name:"Wireless Internet - Fibre",price:350,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Unlimited Fibre Installation<br>Business WiFi + 24/7 Support"},
-  web_dev: {name:"Web Development",price:3000,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Business Website, Landing Page, E-commerce<br>Mobile-first + SEO + 7-14 Days"},
-  app_dev: {name:"App Development",price:5000,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Android + iOS Apps, Admin Portals<br>React, Flutter, Firebase. Custom quotes"},
-  genuine_parts: {name:"Genuine Vehicle Parts",price:0,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Engines, Gearboxes, Suspension, Electronics<br>BMW, BENZ, AUDI, VW, JAGUAR, LANDROVER"},
-  workshop_partner: {name:"Workshop Partnerships",price:0,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Parts supply to garages nationwide<br>Fleet diagnostics + Bulk pricing"},
-  potatoes_large: {name:"Potatoes 10kg - Mondial Grade A Large",price:120,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Premium Mondial Potatoes<br>Size: Large | Bag: 10kg | Grade A"},
-  potatoes_largemedium: {name:"Potatoes 10kg - Mondial Grade A Large-Medium",price:110,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Premium Mondial Potatoes<br>Size: Large-Medium | Bag: 10kg | Grade A"},
-  potatoes_medium: {name:"Potatoes 10kg - Mondial Grade A Medium",price:100,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Premium Mondial Potatoes<br>Size: Medium | Bag: 10kg | Grade A"}
+  diag_jlr: {
+    name:"JLR Diagnostics",price:450,oldPrice:0,
+    images:["https://files.catbox.moe/0zympr.jpeg","https://files.catbox.moe/0zympr.jpeg"],
+    desc:"Full System Scan, DTC Clear, Service Reset<br>DPF Regen, EPB, SAS, Key Programming"
+  },
+  wireless_fibre: {
+    name:"Wireless Internet - Fibre",price:350,oldPrice:0,
+    images:["https://files.catbox.moe/0zympr.jpeg"],
+    desc:"Unlimited Fibre Installation<br>Business WiFi + 24/7 Support"
+  }
 };
 
 function renderProducts(products, stock) {
@@ -337,10 +346,20 @@ function renderProducts(products, stock) {
   Object.keys(products).forEach(id => {
     const p = products[id];
     const isOOS = stock[id];
+    const images = p.images || [p.img] || ["https://files.catbox.moe/0zympr.jpeg"];
+
+    let thumbs = '';
+    if(images.length > 1){
+      thumbs = `<div class="thumbnails">${images.map((img,i)=>`<img src="${img}" onclick="changeImage('${id}',${i})" id="thumb_${id}_${i}" class="${i==0?'active':''}">`).join('')}</div>`;
+    }
+
     grid.innerHTML += `
       <div class="card ${isOOS?'oos':''}" id="${id}" data-id="${id}">
         ${!isClientMode? `<button class="toggle-btn" onclick="toggleStock('${id}')">Toggle</button>` : ''}
-        <img src="${p.img}" alt="${p.name}">
+        <div class="product-gallery">
+          <img src="${images[0]}" class="main-img" id="main_${id}" alt="${p.name}">
+          ${thumbs}
+        </div>
         <h3>${p.name}</h3>
         <p>${p.desc}</p>
         <div><span class="price">${p.price>0?'R'+p.price:'Quote'}</span> ${p.oldPrice>0?`<span class="old-price">R${p.oldPrice}</span>`:''}</div>
@@ -349,6 +368,14 @@ function renderProducts(products, stock) {
       </div>
     `;
   });
+}
+
+window.changeImage = function(id, index){
+  const p = currentProducts[id];
+  const images = p.images || [p.img];
+  document.getElementById(`main_${id}`).src = images[index];
+  document.querySelectorAll(`#${id}.thumbnails img`).forEach(img=>img.classList.remove('active'));
+  document.getElementById(`thumb_${id}_${index}`).classList.add('active');
 }
 
 onValue(productsRef, (snapshot) => {
@@ -370,11 +397,13 @@ function buildEditor(products) {
   let html = '';
   Object.keys(products).forEach(id => {
     const p = products[id];
+    const images = p.images || [p.img] || ['','',''];
     html += `
       <div style="background:#1e293b;padding:10px;border-radius:8px;margin-bottom:8px;border:1px solid var(--border)">
         <b>${id}</b><br>
         <input type="text" id="name_${id}" value="${p.name}" placeholder="Name">
-        <input type="text" id="img_${id}" value="${p.img}" placeholder="Image URL">
+        <small style="color:var(--muted)">Image URLs - First = Main</small>
+        ${[0,1,2,3,4].map(i=>`<input type="text" id="img_${id}_${i}" value="${images[i]||''}" placeholder="Image ${i+1} URL">`).join('')}
         <textarea id="desc_${id}" placeholder="Description">${(p.desc||'').replace(/<br>/g,'\n')}</textarea>
         <input type="number" id="price_${id}" value="${p.price}" placeholder="Price">
         <input type="number" id="oldPrice_${id}" value="${p.oldPrice||''}" placeholder="Old Price">
@@ -388,14 +417,21 @@ window.saveProducts = function() {
   const updates = {};
   Object.keys(currentProducts).forEach(id => {
     const nameEl = document.getElementById(`name_${id}`);
-    const imgEl = document.getElementById(`img_${id}`);
     const descEl = document.getElementById(`desc_${id}`);
     const priceEl = document.getElementById(`price_${id}`);
     const oldPriceEl = document.getElementById(`oldPrice_${id}`);
     if (!nameEl) return;
+
+    let images = [];
+    for(let i=0; i<5; i++){
+      let imgEl = document.getElementById(`img_${id}_${i}`);
+      if(imgEl && imgEl.value.trim()!== '') images.push(imgEl.value.trim());
+    }
+
     updates[id] = {
       name: nameEl.value,
-      img: imgEl.value,
+      images: images,
+      img: images[0], // backwards compatibility
       desc: descEl.value.replace(/\n/g,'<br>'),
       price: parseInt(priceEl.value) || 0,
       oldPrice: parseInt(oldPriceEl.value) || 0
