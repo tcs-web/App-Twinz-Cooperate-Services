@@ -8,7 +8,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
 :root{
   --bg:#030612;--card:#0b1222;--card-hover:#111c33;
-  --accent:#22d3ee;--accent-dark:#06b6d4;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--orange:#f97316;
+  --accent:#22d3ee;--accent-dark:#06b6d4;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;
   --text:#f8fafc;--muted:#64748b;--border:#1e293b;
   --shadow:0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3);
   --shadow-lg:0 20px 25px -5px rgba(0,0,0,0.4), 0 8px 10px -6px rgba(0,0,0,0.4);
@@ -82,16 +82,6 @@ body{
 }
 .thumbnails img.active{border-color:var(--accent);opacity:1}
 .thumbnails img:hover{opacity:1}
-
-/* NEW: NEWSFEED */
-.news-badge{position:absolute;top:15px;right:15px;background:linear-gradient(135deg,var(--orange),#ea580c);color:white;padding:5px 12px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1px;z-index:5;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-.newsfeed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.news-card{border-left:4px solid var(--orange)}
-.news-card img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:12px}
-.news-date{font-size:11px;color:var(--muted);margin-bottom:8px}
-.news-card h4{margin:0 0 8px;color:var(--orange);font-size:16px;font-weight:800}
-.delete-btn{position:absolute;top:10px;right:10px;background:var(--red);color:white;border:none;border-radius:8px;padding:4px 8px;font-size:10px;cursor:pointer}
 
 .card h3{margin:10px 0;color:var(--accent);font-size:18px;font-weight:800;letter-spacing:-0.5px}
 .price{font-size:24px;font-weight:800;color:var(--green);background:linear-gradient(135deg,#22c55e,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
@@ -177,16 +167,6 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
       <input type="text" id="clientLink" readonly>
       <button class="btn-whatsapp" onclick="shareWhatsApp()">Share</button>
     </div>
-
-    <!-- ADDED: NEWSFEED POSTER -->
-    <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:15px;">
-      <h4 style="margin:0 0 10px; color:var(--orange);">📢 Post Special / News</h4>
-      <input type="text" id="newsTitle" placeholder="Special Title - e.g. 20% OFF JLR DIAG">
-      <input type="text" id="newsImage" placeholder="Image URL for Special">
-      <textarea id="newsDesc" placeholder="Write your promo message..." rows="3"></textarea>
-      <button class="btn" style="background:linear-gradient(135deg,#f97316,#ea580c)" onclick="postNews()">📣 Post to Newsfeed</button>
-    </div>
-
     <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:15px;">
       <h4 style="margin:0 0 10px; color:var(--purple);">✏️ Edit Services - Add up to 5 Images</h4>
       <div id="productEditor"></div>
@@ -198,10 +178,6 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
 
 <div class="section-title" style="font-size:18px;font-weight:700;margin:20px 0;color:var(--accent)">⚡ OUR BEST & QUALITY SERVICES</div>
 <div class="grid" id="productGrid"></div>
-
-<!-- ADDED: NEWSFEED SECTION -->
-<div class="section-title" style="font-size:18px;font-weight:700;margin:30px 0 20px;color:var(--orange)">🔥 SPECIALS & NEWSFEED</div>
-<div class="newsfeed-grid" id="newsfeedGrid"></div>
 
 </div>
 
@@ -283,7 +259,7 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-import { getDatabase, ref, set, onValue, remove, push } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
 
 const { jsPDF } = window.jspdf;
@@ -316,11 +292,9 @@ const auth = getAuth(app);
 
 const productsRef = ref(db, 'twinz_services/products');
 const stockRef = ref(db, 'twinz_services/stock');
-const newsRef = ref(db, 'twinz_services/newsfeed'); // ADDED
 
 let cart = [];
 let currentProducts = {};
-let currentNews = {}; // ADDED
 let lastInvoiceData = null;
 const isClientMode = window.location.search.includes('client=true');
 
@@ -352,49 +326,6 @@ onAuthStateChanged(auth, user => {
     document.getElementById('adminControls').style.display = 'block';
   }
 });
-
-// ADDED: NEWSFEED FUNCTIONS
-window.postNews = function(){
-  let title = document.getElementById('newsTitle').value;
-  let image = document.getElementById('newsImage').value;
-  let desc = document.getElementById('newsDesc').value;
-  if(!title ||!desc) { alert('Enter title and description'); return; }
-
-  const newPostRef = push(newsRef);
-  set(newPostRef, {
-    title, image, desc,
-    date: new Date().toLocaleDateString('en-ZA'),
-    timestamp: Date.now()
-  }).then(()=>{
-    document.getElementById('newsTitle').value = '';
-    document.getElementById('newsImage').value = '';
-    document.getElementById('newsDesc').value = '';
-    alert('✅ Special posted!');
-  });
-}
-
-window.deleteNews = function(id){
-  if(confirm('Delete this special?')) remove(ref(db, 'twinz_services/newsfeed/' + id));
-}
-
-function renderNewsfeed(news){
-  const grid = document.getElementById('newsfeedGrid');
-  grid.innerHTML = '';
-  const sorted = Object.entries(news).sort((a,b)=>b[1].timestamp - a[1].timestamp);
-  sorted.forEach(([id, n])=>{
-    grid.innerHTML += `
-      <div class="card news-card">
-        ${!isClientMode? `<button class="delete-btn" onclick="deleteNews('${id}')">X</button>` : ''}
-        <div class="news-badge">NEW</div>
-        ${n.image? `<img src="${n.image}" alt="${n.title}">` : ''}
-        <div class="news-date">📅 ${n.date}</div>
-        <h4>${n.title}</h4>
-        <p>${n.desc}</p>
-        ${isClientMode? `<button class="btn btn-whatsapp" onclick="window.open('https://wa.me/${COMPANY.whatsapp}','_blank')">📱 Inquire Now</button>` : ''}
-      </div>
-    `;
-  });
-}
 
 const defaultProducts = {
   diag_jlr: {
@@ -457,14 +388,8 @@ onValue(productsRef, (snapshot) => {
     let stock = stockSnap.val() || {};
     renderProducts(currentProducts, stock);
     if(!isClientMode) buildEditor(currentProducts);
+    document.getElementById('syncStatus').innerText = '🟢 Connected';
   });
-});
-
-// ADDED: LISTEN TO NEWSFEED
-onValue(newsRef, (snapshot)=>{
-  currentNews = snapshot.val() || {};
-  renderNewsfeed(currentNews);
-  document.getElementById('syncStatus').innerText = '🟢 Connected';
 });
 
 function buildEditor(products) {
