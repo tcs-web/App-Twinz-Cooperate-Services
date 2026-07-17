@@ -5,14 +5,126 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Twinz Cooperate Services - GOD TIER TECH</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-:root{--bg:#05070f;--card:#0f172a;--accent:#22d3ee;--accent-dark:#0891b2;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--purple:#8b5cf6;--text:#f1f5f9;--muted:#94a3b8;--border:#1e293b;--shadow:0 1px 3px rgba(0,0,0,0.3), 0 10px 25px rgba(0,0,0,0.2);--shadow-lg:0 10px 40px rgba(34,211,238,0.15);--gradient:linear-gradient(135deg,#3b82f6 0%,#22d3ee 100%);}*{box-sizing:border-box}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);margin:0;padding:0;padding-bottom:280px;-webkit-font-smoothing:antialiased;}.header{background:var(--gradient);color:#05070f;padding:25px 15px;text-align:center;position:relative;box-shadow:var(--shadow-lg);}.logo{width:90px;height:90px;border-radius:12px;background:white;padding:6px;margin:0 auto 12px;border:3px solid rgba(0,0,0,0.1);object-fit:cover;box-shadow:0 8px 20px rgba(0,0,0,0.3);}.header h1{margin:0;font-size:24px;font-weight:900;letter-spacing:-0.5px;}.header p{margin:8px 0 0;font-size:13px;opacity:0.9;font-weight:600;}.container{padding:20px 15px 240px 15px;max-width:1000px;margin:0 auto}.card{background:var(--card);border-radius:16px;padding:16px;margin:14px 0;box-shadow:var(--shadow);position:relative;border:1px solid var(--border);transition:all 0.3s}.card.oos{opacity:0.4;filter:grayscale(0.5)}.card.oos::after{content:'UNAVAILABLE';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);background:var(--red);color:white;padding:10px 24px;font-weight:700;border-radius:8px;font-size:14px;z-index:10;box-shadow:0 4px 12px rgba(239,68,68,0.4);letter-spacing:1px;}.card img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:12px;border:1px solid var(--border);}.card h3{margin:8px 0;color:var(--accent);font-size:17px;font-weight:700;}.price{font-size:20px;font-weight:700;color:var(--green);}.old-price{text-decoration:line-through;color:var(--muted);font-size:13px;margin-left:6px;}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}.btn{background:var(--gradient);color:#05070f;border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;width:100%;margin-top:10px;}.btn:disabled{background:var(--muted);cursor:not-allowed}.btn-green{background:var(--green)}.btn-red{background:var(--red)}.btn-blue{background:var(--blue)}.btn-secondary{background:#475569;font-size:13px;box-shadow:none}.btn-whatsapp{background:linear-gradient(135deg,#25D366,#128C7E)}.admin-panel{background:linear-gradient(135deg,#0f172a,#1e293b);padding:16px;border-radius:12px;margin:18px 0;border:2px dashed var(--accent);}.toggle-btn{background:#64748b;color:white;border:none;padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:5px;display:inline-block;font-weight:600;}.qty-input{width:70px;padding:6px 8px;border:1px solid var(--border);border-radius:8px;text-align:center;margin:0 6px;font-weight:600;font-size:14px;background:var(--bg);color:var(--text);}input[type="text"],input[type="email"],input[type="password"],input[type="tel"]{width:100%;padding:10px 12px;margin:6px 0;border:1px solid var(--border);border-radius:10px;font-size:14px;background:var(--bg);color:var(--text);}textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:14px;background:var(--bg);color:var(--text);}.sync-status{position:fixed;top:80px;right:12px;z-index:999;background:var(--green);color:#05070f;padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;}.cart{position:fixed;bottom:0;left:0;right:0;background:var(--card);padding:16px;border-top:3px solid var(--accent);box-shadow:0 -4px 20px rgba(0,0,0,0.3);max-height:320px;overflow-y:auto;display:none;}.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:600;}.cart-total{font-size:22px;font-weight:700;color:var(--green);margin:12px 0;}.cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;background:#1e293b;border-radius:8px;margin-bottom:6px;}.copy-box{display:flex;gap:6px;margin-top:10px}.copy-box input{flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg);color:var(--text);}
-.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}.modal-content{background:var(--card);border-radius:16px;padding:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}.invoice-header{text-align:center;border-bottom:2px solid var(--accent);padding-bottom:15px;margin-bottom:15px}.invoice-logo{width:70px;height:70px;border-radius:12px;margin:0 auto 8px}.invoice-table{width:100%;border-collapse:collapse;margin:15px 0;font-size:13px}.invoice-table th{background:var(--accent);color:#05070f;padding:8px;text-align:left}.invoice-table td{padding:8px;border-bottom:1px solid var(--border)}.invoice-total{text-align:right;font-size:18px;font-weight:700;margin-top:10px;color:var(--green)}.invoice-bank{background:#1e293b;border:1px solid var(--accent);padding:10px;border-radius:8px;margin-top:15px;font-size:12px;}@media print{.modal{background:white}.btn{display:none}body{padding:0}}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+:root{
+  --bg:#030612;--card:#0b1222;--card-hover:#111c33;
+  --accent:#22d3ee;--accent-dark:#06b6d4;--green:#22c55e;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;
+  --text:#f8fafc;--muted:#64748b;--border:#1e293b;
+  --shadow:0 4px 6px -1px rgba(0,0,0,0.3), 0 2px 4px -2px rgba(0,0,0,0.3);
+  --shadow-lg:0 20px 25px -5px rgba(0,0,0,0.4), 0 8px 10px -6px rgba(0,0,0,0.4);
+  --shadow-glow:0 0 40px rgba(34,211,238,0.2);
+  --gradient:linear-gradient(135deg,#06b6d4 0%,#3b82f6 100%);
+  --glass:rgba(11,18,34,0.7);
+}
+
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background: radial-gradient(1200px 800px at 10% -10%, rgba(59,130,246,0.15), transparent 50%),
+              radial-gradient(1000px 600px at 90% 10%, rgba(34,211,238,0.12), transparent 50%),
+              var(--bg);
+  color:var(--text);margin:0;padding:0;padding-bottom:280px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* === 1. MODERN HEADER WITH GLASS + GLOW === */
+.header{
+  background:linear-gradient(135deg,rgba(6,182,212,0.95) 0%,rgba(59,130,246,0.95) 100%);
+  backdrop-filter:blur(20px);
+  color:#030612;padding:35px 20px;text-align:center;position:relative;
+  box-shadow:var(--shadow-glow);border-bottom:1px solid rgba(255,255,255,0.1);
+  overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 60%);
+  animation:rotate 20s linear infinite;
+}
+@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.logo{
+  width:100px;height:100px;border-radius:20px;background:white;padding:8px;
+  margin:0 auto 16px;border:3px solid rgba(255,255,255,0.3);object-fit:cover;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);position:relative;z-index:2;transition:transform 0.3s;
+}
+.logo:hover{transform:scale(1.05) rotate(5deg)}
+.header h1{margin:0;font-size:28px;font-weight:900;letter-spacing:-1px;position:relative;z-index:2}
+.header p{margin:10px 0 0;font-size:14px;opacity:0.95;font-weight:600;position:relative;z-index:2}
+
+/* === 2. SOPHISTICATED CARDS WITH HOVER === */
+.card{
+  background:var(--glass);backdrop-filter:blur(20px);
+  border-radius:20px;padding:20px;margin:18px 0;box-shadow:var(--shadow);
+  position:relative;border:1px solid rgba(255,255,255,0.05);
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.card:hover{
+  transform:translateY(-4px);background:var(--card-hover);
+  box-shadow:var(--shadow-lg), 0 0 0 1px rgba(34,211,238,0.3);
+}
+.card.oos{opacity:0.4;filter:grayscale(0.8)}
+.card.oos::after{
+  content:'UNAVAILABLE';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-8deg);
+  background:linear-gradient(135deg,var(--red),#dc2626);color:white;
+  padding:12px 28px;font-weight:800;border-radius:12px;font-size:15px;z-index:10;
+  box-shadow:0 8px 20px rgba(239,68,68,0.5);letter-spacing:1.5px;
+}
+.card img{
+  width:100%;height:220px;object-fit:cover;border-radius:14px;margin-bottom:14px;
+  border:1px solid var(--border);transition:transform 0.4s;
+}
+.card:hover img{transform:scale(1.02)}
+.card h3{margin:10px 0;color:var(--accent);font-size:18px;font-weight:800;letter-spacing:-0.5px}
+.price{font-size:24px;font-weight:800;color:var(--green);background:linear-gradient(135deg,#22c55e,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.old-price{text-decoration:line-through;color:var(--muted);font-size:14px;margin-left:8px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+
+/* === 3. MODERN BUTTONS WITH GRADIENT === */
+.btn{
+  background:var(--gradient);color:#030612;border:none;padding:14px 20px;
+  border-radius:12px;font-weight:800;cursor:pointer;width:100%;margin-top:12px;
+  box-shadow:0 4px 15px rgba(34,211,238,0.3);transition:all 0.3s;
+  position:relative;overflow:hidden;letter-spacing:0.5px;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(34,211,238,0.4)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none}
+.btn-green{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 4px 15px rgba(34,197,94,0.3)}
+.btn-red{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 4px 15px rgba(239,68,68,0.3)}
+.btn-blue{background:linear-gradient(135deg,#3b82f6,#2563eb);box-shadow:0 4px 15px rgba(59,130,246,0.3)}
+.btn-secondary{background:rgba(71,85,105,0.8);font-size:13px;box-shadow:none;border:1px solid var(--border)}
+.btn-whatsapp{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 4px 15px rgba(37,211,102,0.3)}
+
+.admin-panel{
+  background:var(--glass);backdrop-filter:blur(20px);
+  padding:20px;border-radius:16px;margin:24px 0;border:2px solid rgba(34,211,238,0.3);
+  box-shadow:var(--shadow-lg);
+}
+
+.toggle-btn{background:#64748b;color:white;border:none;padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:5px;display:inline-block;font-weight:600;}
+.qty-input{width:70px;padding:6px 8px;border:1px solid var(--border);border-radius:8px;text-align:center;margin:0 6px;font-weight:600;font-size:14px;background:var(--bg);color:var(--text);}
+input[type="text"],input[type="email"],input[type="password"],input[type="tel"],textarea{width:100%;padding:12px 14px;margin:6px 0;border:1px solid var(--border);border-radius:10px;font-size:14px;background:rgba(3,6,18,0.6);color:var(--text);backdrop-filter:blur(10px);}
+.sync-status{position:fixed;top:80px;right:12px;z-index:999;background:var(--green);color:#05070f;padding:7px 12px;border-radius:20px;font-size:11px;font-weight:700;}
+.cart{position:fixed;bottom:0;left:0;right:0;background:var(--glass);backdrop-filter:blur(20px);padding:16px;border-top:3px solid var(--accent);box-shadow:0 -4px 20px rgba(0,0,0,0.3);max-height:320px;overflow-y:auto;display:none;}
+.cart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:600;}
+.cart-total{font-size:22px;font-weight:700;color:var(--green);margin:12px 0;}
+.cart-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;background:#1e293b;border-radius:8px;margin-bottom:6px;}
+.copy-box{display:flex;gap:6px;margin-top:10px}.copy-box input{flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg);color:var(--text);}
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-content{background:var(--glass);backdrop-filter:blur(20px);border-radius:16px;padding:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.invoice-header{text-align:center;border-bottom:2px solid var(--accent);padding-bottom:15px;margin-bottom:15px}
+.invoice-logo{width:70px;height:70px;border-radius:12px;margin:0 auto 8px}
+.invoice-table{width:100%;border-collapse:collapse;margin:15px 0;font-size:13px}
+.invoice-table th{background:var(--accent);color:#05070f;padding:8px;text-align:left}
+.invoice-table td{padding:8px;border-bottom:1px solid var(--border)}
+.invoice-total{text-align:right;font-size:18px;font-weight:700;margin-top:10px;color:var(--green)}
+.invoice-bank{background:#1e293b;border:1px solid var(--accent);padding:10px;border-radius:8px;margin-top:15px;font-size:12px;}
 .footer{background:var(--card);border-top:2px solid var(--border);padding:25px 15px;margin-top:40px;font-size:13px;}
 .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:1000px;margin:0 auto;}
 .footer h4{margin:0 0 10px;color:var(--accent);font-size:15px;}
 .footer p{margin:5px 0;color:var(--muted);}
 .footer.bank-box{background:#1e293b;border:1px solid var(--accent);padding:12px;border-radius:10px;margin-top:8px;}
+.container{padding:20px 15px 240px 15px;max-width:1000px;margin:0 auto}
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -33,13 +145,11 @@
 
 <div class="admin-panel" id="adminPanel">
   <h4>⚙️ Admin Controls - Firebase Sync</h4>
-
   <div id="loginForm">
     <input type="email" id="adminEmail" placeholder="Admin Email">
     <input type="password" id="adminPassword" placeholder="Password">
     <button class="btn btn-blue" onclick="adminLogin()">🔐 Login</button>
   </div>
-
   <div id="adminControls" style="display:none;margin-top:10px">
     <p style="font-size:11px;color:var(--green);margin:5px 0">✅ Logged in</p>
     <button class="btn-red" onclick="adminLogout()">Logout</button>
@@ -49,7 +159,6 @@
       <input type="text" id="clientLink" readonly>
       <button class="btn-whatsapp" onclick="shareWhatsApp()">Share</button>
     </div>
-
     <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:15px;">
       <h4 style="margin:0 0 10px; color:var(--purple);">✏️ Edit Services</h4>
       <div id="productEditor"></div>
@@ -105,7 +214,7 @@
     </div>
   </div>
   <div style="text-align:center;margin-top:20px;color:var(--muted);font-weight:700;">
-    BEST & AFFORDABLE SOLUTIONS | BEST SERVICE ALL OVER SA & ABROAD 
+    BEST & AFFORDABLE SOLUTIONS | BEST SERVICE ALL OVER SA & ABROAD
   </div>
 </footer>
 
@@ -163,7 +272,7 @@ const COMPANY = {
   legal: "TWINZ COOPERATE SERVICES PTY LTD",
   call1: "0682547352",
   call2: "0698949596",
-  whatsapp: "27682547352", // Thabo default
+  whatsapp: "27682547352",
   email: "twinz.cooperate.services@gmail.com",
   address: "Greater Tubatse, Limpopo",
   bank: { name: "Add Bank", acc: "Add Account", branch: "Add Branch" }
@@ -217,8 +326,6 @@ const defaultProducts = {
   app_dev: {name:"App Development",price:5000,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Android + iOS Apps, Admin Portals<br>React, Flutter, Firebase. Custom quotes"},
   genuine_parts: {name:"Genuine Vehicle Parts",price:0,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Engines, Gearboxes, Suspension, Electronics<br>BMW, BENZ, AUDI, VW, JAGUAR, LANDROVER"},
   workshop_partner: {name:"Workshop Partnerships",price:0,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Parts supply to garages nationwide<br>Fleet diagnostics + Bulk pricing"},
-  
-  // NEW: POTATOES - MONDIAL GRADE A 10KG
   potatoes_large: {name:"Potatoes 10kg - Mondial Grade A Large",price:120,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Premium Mondial Potatoes<br>Size: Large | Bag: 10kg | Grade A"},
   potatoes_largemedium: {name:"Potatoes 10kg - Mondial Grade A Large-Medium",price:110,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Premium Mondial Potatoes<br>Size: Large-Medium | Bag: 10kg | Grade A"},
   potatoes_medium: {name:"Potatoes 10kg - Mondial Grade A Medium",price:100,oldPrice:0,img:"https://files.catbox.moe/0zympr.jpeg",desc:"Premium Mondial Potatoes<br>Size: Medium | Bag: 10kg | Grade A"}
@@ -473,7 +580,7 @@ window.shareInvoiceEmail = function() {
   let email = document.getElementById('emailAddress').value;
   if(!email) { alert('Enter customer email'); return; }
   let {customer, items, total, invNum, date, phone, address} = lastInvoiceData;
- let itemText = items.map(i => `${i.name} - Qty: ${i.qty} x R${i.price} = R${i.subtotal}`).join('\n');
+  let itemText = items.map(i => `${i.name} - Qty: ${i.qty} x R${i.price} = R${i.subtotal}`).join('\n');
   let subject = `${COMPANY.name} Invoice ${invNum} - R${total.toLocaleString()}`;
   let body = `Hello ${customer},\n\nPlease find your ${COMPANY.name} invoice below:\n\nInvoice #: ${invNum}\nDate: ${date}\nPhone: ${phone}\nAddress: ${address}\n\nItems:\n${itemText}\n\nTOTAL: R${total.toLocaleString()}\n\nPayment Details:\n${COMPANY.bank.name}\nAcc: ${COMPANY.bank.acc}\nBranch: ${COMPANY.bank.branch}\nAcc Name: ${COMPANY.legal}\n\nThank you for choosing ${COMPANY.name}!\n${COMPANY.call1} | ${COMPANY.call2}`;
   window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
