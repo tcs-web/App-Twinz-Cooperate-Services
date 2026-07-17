@@ -27,20 +27,63 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/*... keep all your existing CSS... */
-
-.header{ background:linear-gradient(135deg,rgba(6,182,212,0.95) 0%,rgba(59,130,246,0.95) 100%); backdrop-filter:blur(20px); color:#030612;padding:35px 20px;text-align:center;position:relative; box-shadow:var(--shadow-glow);border-bottom:1px solid rgba(255,255,255,0.1); overflow:hidden; }
-.header::before{ content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%; background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 60%); animation:rotate 20s linear infinite; }
+.header{
+  background:linear-gradient(135deg,rgba(6,182,212,0.95) 0%,rgba(59,130,246,0.95) 100%);
+  backdrop-filter:blur(20px);
+  color:#030612;padding:35px 20px;text-align:center;position:relative;
+  box-shadow:var(--shadow-glow);border-bottom:1px solid rgba(255,255,255,0.1);
+  overflow:hidden;
+}
+.header::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(circle,rgba(255,255,255,0.15) 0%,transparent 60%);
+  animation:rotate 20s linear infinite;
+}
 @keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.logo{ width:100px;height:100px;border-radius:20px;background:white;padding:8px; margin:0 auto 16px;border:3px solid rgba(255,255,255,0.3);object-fit:cover; box-shadow:0 10px 30px rgba(0,0,0,0.4);position:relative;z-index:2;transition:transform 0.3s; }
+.logo{
+  width:100px;height:100px;border-radius:20px;background:white;padding:8px;
+  margin:0 auto 16px;border:3px solid rgba(255,255,255,0.3);object-fit:cover;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);position:relative;z-index:2;transition:transform 0.3s;
+}
 .logo:hover{transform:scale(1.05) rotate(5deg)}
 .header h1{margin:0;font-size:28px;font-weight:900;letter-spacing:-1px;position:relative;z-index:2}
 .header p{margin:10px 0 0;font-size:14px;opacity:0.95;font-weight:600;position:relative;z-index:2}
 
-.card{ background:var(--glass);backdrop-filter:blur(20px); border-radius:20px;padding:20px;margin:18px 0;box-shadow:var(--shadow); position:relative;border:1px solid rgba(255,255,255,0.05); transition:all 0.4s cubic-bezier(0.4,0,0.2,1); }
-.card:hover{ transform:translateY(-4px);background:var(--card-hover); box-shadow:var(--shadow-lg), 0 0 0 1px rgba(34,211,238,0.3); }
+.card{
+  background:var(--glass);backdrop-filter:blur(20px);
+  border-radius:20px;padding:20px;margin:18px 0;box-shadow:var(--shadow);
+  position:relative;border:1px solid rgba(255,255,255,0.05);
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.card:hover{
+  transform:translateY(-4px);background:var(--card-hover);
+  box-shadow:var(--shadow-lg), 0 0 0 1px rgba(34,211,238,0.3);
+}
+.card.oos{opacity:0.4;filter:grayscale(0.8)}
+.card.oos::after{
+  content:'UNAVAILABLE';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-8deg);
+  background:linear-gradient(135deg,var(--red),#dc2626);color:white;
+  padding:12px 28px;font-weight:800;border-radius:12px;font-size:15px;z-index:10;
+  box-shadow:0 8px 20px rgba(239,68,68,0.5);letter-spacing:1.5px;
+}
 
-/* NEW: NEWSFEED STYLES */
+/* NEW: IMAGE GALLERY */
+.product-gallery{position:relative;margin-bottom:14px}
+.card img.main-img{
+  width:100%;height:220px;object-fit:cover;border-radius:14px;
+  border:1px solid var(--border);transition:transform 0.4s;
+}
+.card:hover img.main-img{transform:scale(1.02)}
+.thumbnails{display:flex;gap:6px;margin-top:8px;overflow-x:auto}
+.thumbnails img{
+  width:50px;height:50px;border-radius:8px;object-fit:cover;
+  border:2px solid transparent;cursor:pointer;opacity:0.6;transition:all 0.3s
+}
+.thumbnails img.active{border-color:var(--accent);opacity:1}
+.thumbnails img:hover{opacity:1}
+
+/* NEW: NEWSFEED */
 .news-badge{position:absolute;top:15px;right:15px;background:linear-gradient(135deg,var(--orange),#ea580c);color:white;padding:5px 12px;border-radius:20px;font-size:10px;font-weight:800;letter-spacing:1px;z-index:5;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 .newsfeed-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
@@ -50,29 +93,31 @@ body{
 .news-card h4{margin:0 0 8px;color:var(--orange);font-size:16px;font-weight:800}
 .delete-btn{position:absolute;top:10px;right:10px;background:var(--red);color:white;border:none;border-radius:8px;padding:4px 8px;font-size:10px;cursor:pointer}
 
-/*... keep rest of your CSS... */
-.product-gallery{position:relative;margin-bottom:14px}
-.card img.main-img{ width:100%;height:220px;object-fit:cover;border-radius:14px; border:1px solid var(--border);transition:transform 0.4s; }
-.card:hover img.main-img{transform:scale(1.02)}
-.thumbnails{display:flex;gap:6px;margin-top:8px;overflow-x:auto}
-.thumbnails img{ width:50px;height:50px;border-radius:8px;object-fit:cover; border:2px solid transparent;cursor:pointer;opacity:0.6;transition:all 0.3s }
-.thumbnails img.active{border-color:var(--accent);opacity:1}
-.thumbnails img:hover{opacity:1}
-
 .card h3{margin:10px 0;color:var(--accent);font-size:18px;font-weight:800;letter-spacing:-0.5px}
 .price{font-size:24px;font-weight:800;color:var(--green);background:linear-gradient(135deg,#22c55e,#16a34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .old-price{text-decoration:line-through;color:var(--muted);font-size:14px;margin-left:8px;font-weight:500}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
 
-.btn{ background:var(--gradient);color:#030612;border:none;padding:14px 20px; border-radius:12px;font-weight:800;cursor:pointer;width:100%;margin-top:12px; box-shadow:0 4px 15px rgba(34,211,238,0.3);transition:all 0.3s; position:relative;overflow:hidden;letter-spacing:0.5px; }
+.btn{
+  background:var(--gradient);color:#030612;border:none;padding:14px 20px;
+  border-radius:12px;font-weight:800;cursor:pointer;width:100%;margin-top:12px;
+  box-shadow:0 4px 15px rgba(34,211,238,0.3);transition:all 0.3s;
+  position:relative;overflow:hidden;letter-spacing:0.5px;
+}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(34,211,238,0.4)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{background:var(--muted);cursor:not-allowed;box-shadow:none}
 .btn-green{background:linear-gradient(135deg,#22c55e,#16a34a);box-shadow:0 4px 15px rgba(34,197,94,0.3)}
 .btn-red{background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 4px 15px rgba(239,68,68,0.3)}
 .btn-blue{background:linear-gradient(135deg,#3b82f6,#2563eb);box-shadow:0 4px 15px rgba(59,130,246,0.3)}
 .btn-secondary{background:rgba(71,85,105,0.8);font-size:13px;box-shadow:none;border:1px solid var(--border)}
 .btn-whatsapp{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 4px 15px rgba(37,211,102,0.3)}
 
-.admin-panel{ background:var(--glass);backdrop-filter:blur(20px); padding:20px;border-radius:16px;margin:24px 0;border:2px solid rgba(34,211,238,0.3); box-shadow:var(--shadow-lg); }
+.admin-panel{
+  background:var(--glass);backdrop-filter:blur(20px);
+  padding:20px;border-radius:16px;margin:24px 0;border:2px solid rgba(34,211,238,0.3);
+  box-shadow:var(--shadow-lg);
+}
 
 .toggle-btn{background:#64748b;color:white;border:none;padding:5px 10px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:5px;display:inline-block;font-weight:600;}
 .qty-input{width:70px;padding:6px 8px;border:1px solid var(--border);border-radius:8px;text-align:center;margin:0 6px;font-weight:600;font-size:14px;background:var(--bg);color:var(--text);}
@@ -85,6 +130,13 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
 .copy-box{display:flex;gap:6px;margin-top:10px}.copy-box input{flex:1;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg);color:var(--text);}
 .modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
 .modal-content{background:var(--glass);backdrop-filter:blur(20px);border-radius:16px;padding:20px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.invoice-header{text-align:center;border-bottom:2px solid var(--accent);padding-bottom:15px;margin-bottom:15px}
+.invoice-logo{width:70px;height:70px;border-radius:12px;margin:0 auto 8px}
+.invoice-table{width:100%;border-collapse:collapse;margin:15px 0;font-size:13px}
+.invoice-table th{background:var(--accent);color:#05070f;padding:8px;text-align:left}
+.invoice-table td{padding:8px;border-bottom:1px solid var(--border)}
+.invoice-total{text-align:right;font-size:18px;font-weight:700;margin-top:10px;color:var(--green)}
+.invoice-bank{background:#1e293b;border:1px solid var(--accent);padding:10px;border-radius:8px;margin-top:15px;font-size:12px;}
 .footer{background:var(--card);border-top:2px solid var(--border);padding:25px 15px;margin-top:40px;font-size:13px;}
 .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;max-width:1000px;margin:0 auto;}
 .footer h4{margin:0 0 10px;color:var(--accent);font-size:15px;}
@@ -132,7 +184,7 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
       <input type="text" id="newsTitle" placeholder="Special Title - e.g. 20% OFF JLR DIAG">
       <input type="text" id="newsImage" placeholder="Image URL for Special">
       <textarea id="newsDesc" placeholder="Write your promo message..." rows="3"></textarea>
-      <button class="btn btn-orange" style="background:linear-gradient(135deg,#f97316,#ea580c)" onclick="postNews()">📣 Post to Newsfeed</button>
+      <button class="btn" style="background:linear-gradient(135deg,#f97316,#ea580c)" onclick="postNews()">📣 Post to Newsfeed</button>
     </div>
 
     <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:15px;">
@@ -153,8 +205,81 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
 
 </div>
 
-<!--... keep your cart, footer, modal code exactly the same... -->
-<div class="cart" id="cartBox"> <div class="cart-header"> <div><b>Your Request:</b> <span id="cartItems">0 items</span></div> <button class="btn-red" onclick="clearCart()">🗑️ Clear</button> </div> <div id="cartList"></div> <div class="cart-total">Quote: R<span id="cartTotal">0</span></div> <button class="btn btn-whatsapp" onclick="sendWhatsAppOrder()">📱 Send Request via WhatsApp</button> </div>
+<div class="cart" id="cartBox">
+  <div class="cart-header">
+    <div><b>Your Request:</b> <span id="cartItems">0 items</span></div>
+    <button class="btn-red" onclick="clearCart()">🗑️ Clear</button>
+  </div>
+  <div id="cartList"></div>
+  <div class="cart-total">Quote: R<span id="cartTotal">0</span></div>
+  <button class="btn btn-whatsapp" onclick="sendWhatsAppOrder()">📱 Send Request via WhatsApp</button>
+</div>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <h4>📞 Contact Us</h4>
+      <p>📱 Thabo: 068 254 7352</p>
+      <p>📱 Thabang: 069 894 9596</p>
+      <p>📧 twinz.cooperate.services@gmail.com</p>
+      <p>📍 Greater Tubatse, Limpopo</p>
+      <p>🕘 Mon - Sat | 8am – 6pm</p>
+    </div>
+    <div>
+      <h4>⚡ Our Services</h4>
+      <p>• JLR Diagnostics From R450</p>
+      <p>• Wireless Internet From R350/mo</p>
+      <p>• Web Development From R3000</p>
+      <p>• App Development From R5000</p>
+      <p>• Genuine Parts: BMW BENZ AUDI VW</p>
+      <p>• Workshop Partnerships Nationwide</p>
+      <p>• 🥔 Potatoes 10kg Mondial Grade A</p>
+    </div>
+    <div>
+      <h4>🏦 Banking Details</h4>
+      <div class="bank-box">
+        <p><strong>Bank:</strong> [Add Your Bank]</p>
+        <p><strong>Account No:</strong> [Add Account]</p>
+        <p><strong>Branch Code:</strong> [Add Branch]</p>
+        <p><strong>Account Name:</strong> TWINZ COOPERATE SERVICES PTY LTD</p>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:20px;color:var(--muted);font-weight:700;">
+    BEST & AFFORDABLE SOLUTIONS | BEST SERVICE ALL OVER SA & ABROAD
+  </div>
+</footer>
+
+<div class="modal" id="invoiceModal">
+  <div class="modal-content">
+    <h3 style="margin-top:0;color:var(--accent)">🧾 Create Invoice</h3>
+    <input type="text" id="invCustomer" placeholder="Customer Name">
+    <input type="tel" id="invPhone" placeholder="Customer Phone - 068... or 27...">
+    <input type="email" id="invEmail" placeholder="Customer Email">
+    <textarea id="invAddress" placeholder="Delivery/Installation Address" rows="2"></textarea>
+    <h4 style="margin:15px 0 8px;color:var(--purple)">Select Services:</h4>
+    <div id="invoiceProducts"></div>
+    <button class="btn btn-blue" onclick="generateInvoice()">Generate Invoice</button>
+    <button class="btn-secondary" onclick="closeInvoiceModal()">Cancel</button>
+    <div id="invoiceActions" style="display:none;margin-top:15px;border-top:2px solid var(--border);padding-top:15px">
+      <small style="color:var(--muted)">Share invoice:</small>
+      <div style="margin-top:8px">
+        <input type="tel" id="whatsappNumber" placeholder="27... for WhatsApp">
+        <button class="btn btn-whatsapp" onclick="shareInvoiceWhatsApp()">📱 Send via WhatsApp</button>
+      </div>
+      <div style="margin-top:8px">
+        <input type="email" id="emailAddress" placeholder="customer@email.com">
+        <button class="btn btn-blue" onclick="shareInvoiceEmail()">📧 Send via Email</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+        <button class="btn btn-green" onclick="downloadPDF()">⬇️ Download PDF</button>
+        <button class="btn-secondary" onclick="printInvoice()">🖨️ Print Only</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="invoicePrint" style="position:absolute;left:-9999px;top:0;background:var(--card);width:800px;padding:30px;font-family:Inter,sans-serif"></div>
 
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
@@ -195,7 +320,7 @@ const newsRef = ref(db, 'twinz_services/newsfeed'); // NEW
 
 let cart = [];
 let currentProducts = {};
-let currentNews = {};
+let currentNews = {}; // NEW
 let lastInvoiceData = null;
 const isClientMode = window.location.search.includes('client=true');
 
@@ -228,7 +353,7 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-// NEW: POST NEWS FUNCTION
+// NEW: NEWSFEED FUNCTIONS
 window.postNews = function(){
   let title = document.getElementById('newsTitle').value;
   let image = document.getElementById('newsImage').value;
@@ -252,7 +377,6 @@ window.deleteNews = function(id){
   if(confirm('Delete this special?')) remove(ref(db, 'twinz_services/newsfeed/' + id));
 }
 
-// NEW: RENDER NEWSFEED
 function renderNewsfeed(news){
   const grid = document.getElementById('newsfeedGrid');
   grid.innerHTML = '';
@@ -388,7 +512,9 @@ window.saveProducts = function() {
       oldPrice: parseInt(oldPriceEl.value) || 0
     };
   });
-  set(productsRef, updates).then(() => alert('✅ Saved to Firebase!')).catch(err => alert('Error: ' + err.message));
+  set(productsRef, updates)
+.then(() => alert('✅ Saved to Firebase!'))
+.catch(err => alert('Error: ' + err.message));
 }
 
 window.toggleStock = (id) => {
@@ -497,7 +623,80 @@ window.generateInvoice = function() {
   alert('✅ Invoice ready! Click Download PDF');
 }
 
-//... keep your invoice functions here...
+function buildInvoiceHTML(data) {
+  let {customer, phone, address, items, total, invNum, date} = data;
+  let rows = items.map(i => `<tr><td>${i.name}</td><td>${i.qty}</td><td>R${i.price.toLocaleString()}</td><td>R${i.subtotal.toLocaleString()}</td></tr>`).join('');
+  return `
+    <div style="padding:30px;font-family:Inter,sans-serif;max-width:800px;margin:0 auto;color:#000;background:#fff">
+      <div class="invoice-header">
+        <img src="https://files.catbox.moe/0zympr.jpeg" class="invoice-logo">
+        <h2 style="margin:5px 0;color:#0891b2">${COMPANY.name.toUpperCase()}</h2>
+        <p style="margin:0;font-size:12px">${COMPANY.legal}</p>
+        <p style="margin:0;font-size:12px">${COMPANY.call1} | ${COMPANY.call2} | ${COMPANY.email}</p>
+        <p style="margin:0;font-size:12px">${COMPANY.address}</p>
+        <h3 style="margin:10px 0">TAX INVOICE</h3>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:20px;font-size:13px">
+        <div><b>Bill To:</b><br>${customer}<br>${phone}<br>${address}</div>
+        <div style="text-align:right"><b>Invoice #:</b> ${invNum}<br><b>Date:</b> ${date}<br><b>Status:</b> Paid/COD</div>
+      </div>
+      <table class="invoice-table"><thead><tr><th>Service</th><th>Qty</th><th>Unit Price</th><th>Amount</th></tr></thead><tbody>${rows}</tbody></table>
+      <div class="invoice-total">TOTAL: R${total.toLocaleString()}</div>
+      <div class="invoice-bank"><strong>Payment Details:</strong><br>Bank: ${COMPANY.bank.name}<br>Account Name: ${COMPANY.legal}<br>Account No: ${COMPANY.bank.acc}<br>Branch Code: ${COMPANY.bank.branch}<br><small>Use Invoice # as reference</small></div>
+      <div style="margin-top:30px;text-align:center;font-size:11px;color:#64748b;border-top:1px solid #ddd;padding-top:10px">Thank you for choosing ${COMPANY.name} | GOD TIER SERVICE</div>
+    </div>`;
+}
+
+window.printInvoice = function() {
+  if(!lastInvoiceData) return;
+  document.getElementById('invoicePrint').innerHTML = buildInvoiceHTML(lastInvoiceData);
+  let printWindow = window.open('', '_blank');
+  printWindow.document.write(`<html><head><title>Invoice ${lastInvoiceData.invNum}</title><style>${document.querySelector('style').innerText}</style></head><body>${buildInvoiceHTML(lastInvoiceData)}</body></html>`);
+  printWindow.document.close(); printWindow.print();
+}
+
+window.downloadPDF = async function() {
+  if(!lastInvoiceData) return;
+  let {invNum, customer} = lastInvoiceData;
+  let fileName = `TwinzInvoice_${invNum}_${customer.replace(/\s+/g,'_')}.pdf`;
+  document.getElementById('invoicePrint').innerHTML = buildInvoiceHTML(lastInvoiceData);
+  document.getElementById('syncStatus').innerText = '⏳ Creating PDF...';
+  try {
+    const canvas = await html2canvas(document.getElementById('invoicePrint'), {scale: 2, useCORS: true, backgroundColor: '#ffffff'});
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight); pdf.save(fileName);
+    document.getElementById('syncStatus').innerText = '🟢 Connected';
+    alert('✅ PDF Downloaded!');
+  } catch(e) {
+    document.getElementById('syncStatus').innerText = '🟢 Connected';
+    alert('Error creating PDF: ' + e.message);
+  }
+}
+
+window.shareInvoiceWhatsApp = function() {
+  if(!lastInvoiceData) return;
+  let waPhone = document.getElementById('whatsappNumber').value.replace(/\D/g,'');
+  if(!waPhone.startsWith('27')) waPhone = '27' + waPhone;
+  let {customer, items, total, invNum, date} = lastInvoiceData;
+  let itemText = items.map(i => `• ${i.name}\n Qty: ${i.qty} | R${i.subtotal.toLocaleString()}`).join('\n\n');
+  let message = `Hello ${customer}, here is your ${COMPANY.name} invoice:\n\n*Invoice #${invNum}*\nDate: ${date}\n\n${itemText}\n\n*TOTAL: R${total.toLocaleString()}*\n\nThank you for choosing us! ⚡`;
+  window.open(`https://wa.me/${waPhone}?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+window.shareInvoiceEmail = function() {
+  if(!lastInvoiceData) return;
+  let email = document.getElementById('emailAddress').value;
+  if(!email) { alert('Enter customer email'); return; }
+  let {customer, items, total, invNum, date, phone, address} = lastInvoiceData;
+  let itemText = items.map(i => `${i.name} - Qty: ${i.qty} x R${i.price} = R${i.subtotal}`).join('\n');
+  let subject = `${COMPANY.name} Invoice ${invNum} - R${total.toLocaleString()}`;
+  let body = `Hello ${customer},\n\nPlease find your ${COMPANY.name} invoice below:\n\nInvoice #: ${invNum}\nDate: ${date}\nPhone: ${phone}\nAddress: ${address}\n\nItems:\n${itemText}\n\nTOTAL: R${total.toLocaleString()}\n\nPayment Details:\n${COMPANY.bank.name}\nAcc: ${COMPANY.bank.acc}\nBranch: ${COMPANY.bank.branch}\nAcc Name: ${COMPANY.legal}\n\nThank you for choosing ${COMPANY.name}!\n${COMPANY.call1} | ${COMPANY.call2}`;
+  window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 </script>
 </body>
 </html>
