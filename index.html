@@ -178,7 +178,7 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
       <button class="btn-whatsapp" onclick="shareWhatsApp()">Share</button>
     </div>
 
-    <!-- NEW: NEWSFEED POSTER -->
+    <!-- ADDED: NEWSFEED POSTER -->
     <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:15px;">
       <h4 style="margin:0 0 10px; color:var(--orange);">📢 Post Special / News</h4>
       <input type="text" id="newsTitle" placeholder="Special Title - e.g. 20% OFF JLR DIAG">
@@ -199,7 +199,7 @@ input[type="text"],input[type="email"],input[type="password"],input[type="tel"],
 <div class="section-title" style="font-size:18px;font-weight:700;margin:20px 0;color:var(--accent)">⚡ OUR BEST & QUALITY SERVICES</div>
 <div class="grid" id="productGrid"></div>
 
-<!-- NEW: NEWSFEED SECTION -->
+<!-- ADDED: NEWSFEED SECTION -->
 <div class="section-title" style="font-size:18px;font-weight:700;margin:30px 0 20px;color:var(--orange)">🔥 SPECIALS & NEWSFEED</div>
 <div class="newsfeed-grid" id="newsfeedGrid"></div>
 
@@ -316,11 +316,11 @@ const auth = getAuth(app);
 
 const productsRef = ref(db, 'twinz_services/products');
 const stockRef = ref(db, 'twinz_services/stock');
-const newsRef = ref(db, 'twinz_services/newsfeed'); // NEW
+const newsRef = ref(db, 'twinz_services/newsfeed'); // ADDED
 
 let cart = [];
 let currentProducts = {};
-let currentNews = {}; // NEW
+let currentNews = {}; // ADDED
 let lastInvoiceData = null;
 const isClientMode = window.location.search.includes('client=true');
 
@@ -353,7 +353,7 @@ onAuthStateChanged(auth, user => {
   }
 });
 
-// NEW: NEWSFEED FUNCTIONS
+// ADDED: NEWSFEED FUNCTIONS
 window.postNews = function(){
   let title = document.getElementById('newsTitle').value;
   let image = document.getElementById('newsImage').value;
@@ -460,7 +460,7 @@ onValue(productsRef, (snapshot) => {
   });
 });
 
-// NEW: LISTEN TO NEWSFEED
+// ADDED: LISTEN TO NEWSFEED
 onValue(newsRef, (snapshot)=>{
   currentNews = snapshot.val() || {};
   renderNewsfeed(currentNews);
@@ -506,7 +506,7 @@ window.saveProducts = function() {
     updates[id] = {
       name: nameEl.value,
       images: images,
-      img: images[0],
+      img: images[0], // backwards compatibility
       desc: descEl.value.replace(/\n/g,'<br>'),
       price: parseInt(priceEl.value) || 0,
       oldPrice: parseInt(oldPriceEl.value) || 0
